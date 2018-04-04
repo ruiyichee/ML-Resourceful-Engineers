@@ -7,12 +7,19 @@
 #os.chdir("C:\\Users\\ruiyicx\\Documents\\SUTD Subjects\\ESD Term 7\\01.112 Machine Learning\\Project\\CN\\CN")
 
 def get_data(data):
+	dictionary = {}
 	raw_data = open(data, 'r', encoding= "utf8")	# r+ is Special read and write mode, which is used to handle both actions when working with a file
-	read = raw_data.read()
-	print (read)
+	d = raw_data.read()
+	# print (d)
+	words = d.split('/n')
+	for words2 in words:
+		words3 = words2.split('\n')
+	print(words3)
+
+
 #EN
 dirEN_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/train'
 dirEN_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.in'
 dirEN_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.out'
 
-get_data(dirEN_out)
+get_data(dirEN_train)
