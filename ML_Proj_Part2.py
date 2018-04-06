@@ -10,6 +10,7 @@ def get_data(data):
 	raw_data = open(data, 'r+', encoding= "utf8")	# r+ is Special read and write mode, which is used to handle both actions when working with a file
 	d = raw_data.read()
 	pairs = d.split('/n')
+	print(pairs)
 	for words in pairs:
 		words2 = words.split('\n')
 		words3 = words.rsplit()
@@ -44,8 +45,18 @@ def get_data(data):
 	print(tag_count)
 
 #EN
-dirEN_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/train'
-dirEN_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.in'
-dirEN_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.out'
+# dirEN_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/train'
+# dirEN_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.in'
+# dirEN_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.out'
 
-get_data(dirEN_train)
+dirEN_train = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
+dirEN_in = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.in')
+dirEN_out = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.out')
+print(dirEN_train)
+
+#def getparameters(trgfile):
+#	worddict = {}
+#	labeldict ={}
+#	for line in trgfile:
+#		pair = line.split()
+
