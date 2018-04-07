@@ -5,7 +5,7 @@
 ggdict = {}
 nesteddict = {"B-positive": 0,"B-negative":0,"B-neutral":0,"I-positive":0,"I-negative":0,"I-neutral":0,"O":0}
 
-def get_data(data):
+def emission_par\(data):
 	global ggdict
 	global nesteddict
 	dictionary = {}
@@ -56,13 +56,13 @@ def get_data(data):
 			else:
 				totalcountO += 1
 
-		for k in globaldict:
-			vdict = globaldict[k]
-			if k not in ggdict:
-				ggdict[k] = vdict
+		for k in globaldict: ##k refers to the words in the smaller global dictionary
+			vdict = globaldict[k] ##vdict refers to the existing dictionary of label counts for the particular word k
+			if k not in ggdict: ## if the word k does not exist in the global global dictionary
+				ggdict[k] = vdict ## update the global global dictionary with the existing dictionary of label counts
 			else:
 				for k1,v in vdict.items():
-					ggdict[k][k1] += v
+					ggdict[k][k1] += v ##add the label counts to the global global dictionary
 
 	# countu = words4.count('O')
 	# print(countu)
@@ -81,12 +81,12 @@ def get_data(data):
 dirEN_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/train'
 dirEN_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.in'
 dirEN_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.out'
-get_data(dirEN_train)
+emission_par(dirEN_train)
 
-# dirEN_train = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
-# dirEN_in = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.in')
-# dirEN_out = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.out')
-# get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
+# dirEN_train = emission_par('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
+# dirEN_in = emission_par('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.in')
+# dirEN_out = emission_par('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.out')
+# emission_par('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
 # 
 #print(globaldict["@dawngpsalm63"])
 #print(nesteddict)
