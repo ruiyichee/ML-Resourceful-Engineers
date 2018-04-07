@@ -88,14 +88,61 @@ def emission_par(words):
 	# print(totalcountIneg)
 	# print(totalcountIneu)
 
+def modified_test(trainfile,testfile):
+	raw_train = open(trainfile, 'r+', encoding= "utf8")	# r+ is Special read and write mode, which is used to handle both actions when working with a file
+	# d_train = raw_train.read()
+	# words = d_train.split('/n')
+
+	words_in_train = []
+	for words2 in raw_train:
+		words3 = words2.split('\n') ##words3 is a list of pairs of words and their labels
+		for i in range(len(words3)):
+			spt = words3[i].split(" ")
+			if len(spt) > 3 or len(spt) <2:
+				continue
+			# print(spt)
+			key1 = spt[0]				
+			words_in_train.append(key1)
+	
+	# print(words_in_train)
+	raw_test = open(testfile, 'r+', encoding= "utf8")	# r+ is Special read and write mode, which is used to handle both actions when working with a file
+	words_in_test = []
+	for words2 in raw_test:
+		words3 = words2.rsplit()
+		# print(words3)
+		for i in range(len(words3)):
+			key = words3[i]
+			words_in_test.append(key)
+	modified_test = words_in_test
+
+	kcount = 0
+	for x in range(len(words_in_test)):
+		if words_in_test[x] not in words_in_train:
+			modified_test[x] = '#UNK#'
+			kcount += 1
+	# print(modified_test)
+	# print(kcount)
+
+	f= open("modified_file.txt","w+", encoding= "utf8")
+	for item in range(len(modified_test)):
+		word = modified_test[item]
+		f.write("%s\n" %word)
+	f.close()
+
+	return modified_test, kcount
+
 
 # EN
-dirEN_train = get_data('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/train')
-dirEN_in = get_data('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.in')
-dirEN_out = get_data('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.out')
-emission_par(dirEN_train)
+dirEN_train = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/train')
+dirEN_in = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.in')
+dirEN_out = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.out')
+emission_par(get_data(dirEN_train))
+# modified_test(dirEN_train, dirEN_in)
 
-# dirEN_train = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
-# dirEN_in = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.in')
-# dirEN_out = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.out')
-# emission_par(dirEN_train)
+# dirEN_train = emission_par('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
+# dirEN_in = emission_par('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.in')
+# dirEN_out = emission_par('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.out')
+# emission_par('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
+# 
+#print(globaldict["@dawngpsalm63"])
+#print(nesteddict)
