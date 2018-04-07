@@ -1,11 +1,10 @@
 # Set Working Directory to your source file; insert double \
-# import os
 # General Resourceful Engineers File
 
 ggdict = {}
 nesteddict = {"B-positive": 0,"B-negative":0,"B-neutral":0,"I-positive":0,"I-negative":0,"I-neutral":0,"O":0}
 
-def emission_par\(data):
+def emission_par(data):
 	global ggdict
 	global nesteddict
 	dictionary = {}
@@ -38,10 +37,7 @@ def emission_par\(data):
 			nesteddict = {"B-positive": 0, "B-negative": 0, "B-neutral": 0, "I-positive": 0, "I-negative": 0,
 							  "I-neutral": 0, "O": 0}
 
-			if label1 == 'O':
-				# print(key1)
-				totalcountO += 1
-			elif label1 == 'B-positive':
+			if label1 == 'B-positive':
 				totalcountBpos += 1
 			elif label1 == 'B-negative':
 				totalcountBneg += 1
@@ -63,6 +59,26 @@ def emission_par\(data):
 			else:
 				for k1,v in vdict.items():
 					ggdict[k][k1] += v ##add the label counts to the global global dictionary
+
+		# Calculate the emission parameters
+		for word,tagdict in ggdict.items():
+			for tag,count in tagdict.items():
+				if tag == 'B-positive':
+					ggdict[word][tag] = ggdict[word][tag]/totalcountBpos
+				elif tag == 'B-negative':
+					ggdict[word][tag] = ggdict[word][tag]/totalcountBneg
+				elif tag == 'B-neutral':
+					ggdict[word][tag] = ggdict[word][tag]/totalcountBneu
+				elif tag == 'I-positive':
+					ggdict[word][tag] = ggdict[word][tag]/totalcountIpos
+				elif tag == 'I-negative':
+					ggdict[word][tag] = ggdict[word][tag]/totalcountIneg
+				elif tag == 'I-neutral':
+					ggdict[word][tag] = ggdict[word][tag]/totalcountIneu
+				else:
+					ggdict[word][tag] = ggdict[word][tag]/totalcountO
+		# print(ggdict)
+
 
 	# countu = words4.count('O')
 	# print(countu)
@@ -90,3 +106,4 @@ emission_par(dirEN_train)
 # 
 #print(globaldict["@dawngpsalm63"])
 #print(nesteddict)
+
