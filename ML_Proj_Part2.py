@@ -1,62 +1,92 @@
 # Set Working Directory to your source file; insert double \
-#import os
+# import os
 # General Resourceful Engineers File
-#os.chdir("C:\\Users\\ruiyicx\\Documents\\SUTD Subjects\\ESD Term 7\\01.112 Machine Learning\\Project")
 
-# CN File
-#os.chdir("C:\\Users\\ruiyicx\\Documents\\SUTD Subjects\\ESD Term 7\\01.112 Machine Learning\\Project\\CN\\CN")
+ggdict = {}
+nesteddict = {"B-positive": 0,"B-negative":0,"B-neutral":0,"I-positive":0,"I-negative":0,"I-neutral":0,"O":0}
 
 def get_data(data):
-	raw_data = open(data, 'r+', encoding= "utf8")	# r+ is Special read and write mode, which is used to handle both actions when working with a file
+	global ggdict
+	global nesteddict
+	dictionary = {}
+	raw_data = open(data, 'r', encoding= "utf8")	# r+ is Special read and write mode, which is used to handle both actions when working with a file
 	d = raw_data.read()
-	pairs = d.split('/n')
-	print(pairs)
-	for words in pairs:
-		words2 = words.split('\n')
-		words3 = words.rsplit()
-		# The words are split in the list format.
-	print(words3)
+	#print(d)
+	words = d.split('/n')
+	#print(ggdict,"\nhi")
+	totalcountBpos = 0
+	totalcountBneg = 0
+	totalcountBneu = 0
+	totalcountIpos = 0
+	totalcountIneg = 0
+	totalcountIneu = 0
+	totalcountO = 0
 
-	# Create a nested list, with the words in the first nested list, and the tags in the second nested list
-	# [[words], [tags]]
-	# lst = [[] for x in range(2)]
+	for words2 in words:
+		globaldict = {}
+		words3 = words2.split('\n') ##words3 is a list of pairs of words and their labels
+		for i in range(len(words3)):
+			spt = words3[i].split(" ")
+			if len(spt) > 3 or len(spt) <2:
+				continue
+			#print(spt)
+			key1 = spt[0]
+			label1 = spt[1]
+			if key1 not in globaldict:
+				globaldict[key1] = nesteddict
+				globaldict[key1][label1] += 1
+			nesteddict = {"B-positive": 0, "B-negative": 0, "B-neutral": 0, "I-positive": 0, "I-negative": 0,
+							  "I-neutral": 0, "O": 0}
 
-	# Create a dictionary for emission count and tag count
-	emission_count = {} 
-	tag_count = {}
-	for w in words3:
-		if w == 'O' or w == 'B-neutral' or w == 'B-negative' or w == 'B-positive' or w == 'I-neutral' or w == 'I-negative' or w == 'I-positive':
-			if w not in tag_count:
-				tag_count[w] = 1
+			if label1 == 'O':
+				# print(key1)
+				totalcountO += 1
+			elif label1 == 'B-positive':
+				totalcountBpos += 1
+			elif label1 == 'B-negative':
+				totalcountBneg += 1
+			elif label1 == 'B-neutral':
+				totalcountBneu += 1
+			elif label1 == 'I-positive':
+				totalcountIpos += 1
+			elif label1 == 'I-negative':
+				totalcountIneg += 1
+			elif label1 == 'I-neutral':
+				totalcountIneu += 1
 			else:
-				tag_count[w] += 1
-		else:
-			if w not in emission_count:
-				emission_count[w] = 1
+				totalcountO += 1
+
+		for k in globaldict:
+			vdict = globaldict[k]
+			if k not in ggdict:
+				ggdict[k] = vdict
 			else:
-				emission_count[w] += 1
+				for k1,v in vdict.items():
+					ggdict[k][k1] += v
 
-	countu = words3.count('O')
-	print(countu)
-	# print(lst)
-	# for item in 
-	
-	print(emission_count)
-	print(tag_count)
+	# countu = words4.count('O')
+	# print(countu)
+	# print("ggdict:%s" %ggdict)
 
-#EN
-# dirEN_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/train'
-# dirEN_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.in'
-# dirEN_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.out'
+	# print(totalcountO)
+	# print(totalcountBpos)
+	# print(totalcountBneg)
+	# print(totalcountBneu)
+	# print(totalcountIpos)
+	# print(totalcountIneg)
+	# print(totalcountIneu)
 
-dirEN_train = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
-dirEN_in = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.in')
-dirEN_out = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.out')
-print(dirEN_train)
 
-#def getparameters(trgfile):
-#	worddict = {}
-#	labeldict ={}
-#	for line in trgfile:
-#		pair = line.split()
+# EN
+dirEN_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/train'
+dirEN_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.in'
+dirEN_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.out'
+get_data(dirEN_train)
 
+# dirEN_train = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
+# dirEN_in = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.in')
+# dirEN_out = get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.out')
+# get_data('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
+# 
+#print(globaldict["@dawngpsalm63"])
+#print(nesteddict)
