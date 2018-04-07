@@ -1,18 +1,18 @@
-# Set Working Directory to your source file; insert double \
 # General Resourceful Engineers File
 
 ggdict = {}
 nesteddict = {"B-positive": 0,"B-negative":0,"B-neutral":0,"I-positive":0,"I-negative":0,"I-neutral":0,"O":0}
 
-def emission_par(data):
-	global ggdict
-	global nesteddict
-	dictionary = {}
+def get_data(data):
 	raw_data = open(data, 'r', encoding= "utf8")	# r+ is Special read and write mode, which is used to handle both actions when working with a file
 	d = raw_data.read()
-	#print(d)
 	words = d.split('/n')
-	#print(ggdict,"\nhi")
+	return words
+
+def emission_par(words):
+	global ggdict
+	global nesteddict
+
 	totalcountBpos = 0
 	totalcountBneg = 0
 	totalcountBneu = 0
@@ -20,7 +20,6 @@ def emission_par(data):
 	totalcountIneg = 0
 	totalcountIneu = 0
 	totalcountO = 0
-
 	for words2 in words:
 		globaldict = {}
 		words3 = words2.split('\n') ##words3 is a list of pairs of words and their labels
@@ -60,7 +59,7 @@ def emission_par(data):
 				for k1,v in vdict.items():
 					ggdict[k][k1] += v ##add the label counts to the global global dictionary
 
-		# Calculate the emission parameters
+		# Calculating the emission parameters
 		for word,tagdict in ggdict.items():
 			for tag,count in tagdict.items():
 				if tag == 'B-positive':
@@ -77,11 +76,8 @@ def emission_par(data):
 					ggdict[word][tag] = ggdict[word][tag]/totalcountIneu
 				else:
 					ggdict[word][tag] = ggdict[word][tag]/totalcountO
-		# print(ggdict)
+		print(ggdict)
 
-
-	# countu = words4.count('O')
-	# print(countu)
 	# print("ggdict:%s" %ggdict)
 
 	# print(totalcountO)
@@ -94,7 +90,7 @@ def emission_par(data):
 
 
 # EN
-dirEN_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/train'
+dirEN_train = get_data('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/train')
 dirEN_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.in'
 dirEN_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.out'
 emission_par(dirEN_train)
@@ -106,4 +102,3 @@ emission_par(dirEN_train)
 # 
 #print(globaldict["@dawngpsalm63"])
 #print(nesteddict)
-
