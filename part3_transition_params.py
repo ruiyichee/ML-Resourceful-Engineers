@@ -21,7 +21,7 @@ def transition_params(train_file):
     with open(EN_train, encoding='utf=8') as file:
         for line in file:
             word_pair= line.split()
-            if len(word_pair) !=0:
+            if len(word_pair) !=0 and len(word_pair) <3:
                 value = word_pair[1]
                 #print (value)
 
