@@ -3,6 +3,9 @@
 # from datetime import datetime
 # start_time = datetime.now()
 
+# import os
+# os.chdir('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project')
+
 ggdict = {}
 nesteddict = {"B-positive": 0, "B-negative": 0, "B-neutral": 0, "I-positive": 0, "I-negative": 0, "I-neutral": 0,
               "O": 0}
@@ -246,18 +249,48 @@ dirEN_train = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machi
 dirEN_in = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.in')
 dirEN_out = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.out')
 dirEN_test = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/modified_file.txt')
+# CN
+dirCN_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/CN/CN/train'
+dirCN_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/CN/CN/dev.in'
+dirCN_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/CN/CN/dev.out'
+dirCN_test = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/CN/CN/modified_file.txt'
+# ES
+dirES_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/train'
+dirES_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/dev.in'
+dirES_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/dev.out'
+dirES_test = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/modified_file.txt'
+# RU
+dirRU_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/train'
+dirRU_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/dev.in'
+dirRU_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/dev.out'
+dirRU_test = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/modified_file.txt'
 
 # REGINA
 # dirEN_train = ('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
 # dirEN_in = ('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.in')
 # dirEN_out = ('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.out')
 
+## EN
 # emission_par(get_data(dirEN_train))
-modified_test, kcount = modified_test(dirEN_train, dirEN_in)
-emission_param = modified_emission_par(get_data(dirEN_train),kcount)
-#print(emission_param)
-sentiment_analysis(dirEN_in, emission_param)
+# modified_test, kcount = modified_test(dirEN_train, dirEN_in)
+# emission_param = modified_emission_par(get_data(dirEN_train),kcount)
+# #print(emission_param)
+# sentiment_analysis(dirEN_in, emission_param)
+
+## CN
+# modified_test, kcount = modified_test(dirCN_train, dirCN_in)
+# emission_param = modified_emission_par(get_data(dirCN_train),kcount)
+# sentiment_analysis(dirCN_in, emission_param)
+
+## ES
+# modified_test, kcount = modified_test(dirES_train, dirES_in)
+# emission_param = modified_emission_par(get_data(dirES_train),kcount)
+# sentiment_analysis(dirES_in, emission_param)
+
+## RU
+# modified_test, kcount = modified_test(dirRU_train, dirRU_in)
+# emission_param = modified_emission_par(get_data(dirRU_train),kcount)
+# sentiment_analysis(dirRU_in, emission_param)
 
 # end_time = datetime.now()
 # print('Duration: {}'.format(end_time - start_time))
-
