@@ -228,12 +228,16 @@ def sentiment_analysis(test_file, emission_params):
                 tagdict = emission_params[w]
                 # print(tagdict)
                 output[w] = max(tagdict,key=tagdict.get)
+                UNKtag = max(emission_params['#UNK#'], key= emission_params['#UNK#'].get)
             else:
                 output[w] = "#UNK#" #for missing words, tag = #UNK#
     print(output)
     f = open("dev.p2.out", "w+", encoding="utf8")
     for key,value in output.items():
-        f.write("%s %s\n" % (key,value))
+        if value == "#UNK#":
+            f.write("%s %s\n" % ("#UNK#", UNKtag))
+        else:
+            f.write("%s %s\n" % (key,value))
     f.close()
 
 # EN
