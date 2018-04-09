@@ -52,7 +52,7 @@ def transition_params(train_file):
                 else:
                     state_count[value] = 1
 
-                u_value = value
+                u_state = value
 
             else:
                 value_list=transition_count[v_state]
