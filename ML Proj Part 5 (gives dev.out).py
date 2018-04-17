@@ -182,7 +182,7 @@ os.chdir('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Lea
 dirES_train =('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/train')
 dirES_in =('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/dev.in')
 dirES_out =('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/dev.out')
-words_in_train_ES, train_data_ES, count_words_in_test_ES, words_in_test_ES = modifytestfile(dirES_train,dirRU_in)
+words_in_train_ES, train_data_ES, count_words_in_test_ES, words_in_test_ES = modifytestfile(dirES_train,dirES_in)
 theta_vector_ES = training(words_in_train_ES, train_data_ES,10,1)
 predict(count_words_in_test_ES, theta_vector_ES, words_in_test_ES, words_in_train_ES,1)
 print("ES DONE")
