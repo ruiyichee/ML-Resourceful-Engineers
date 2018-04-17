@@ -1,8 +1,12 @@
 import numpy as np
+import os
 
-dirEN_train =('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
-dirEN_in =('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.in')
-dirEN_out =('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.out')
+from datetime import datetime
+start_time = datetime.now()
+
+# dirEN_train =('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
+# dirEN_in =('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.in')
+# dirEN_out =('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.out')
 
 def modifytestfile(trainfile, testfile):
     raw_train = open(trainfile, 'r+',
@@ -63,11 +67,11 @@ def modifytestfile(trainfile, testfile):
 
     return words_in_train, train_data, modified_test, words_in_test
 
-words_in_train, train_data, count_words_in_test, words_in_test = modifytestfile(dirEN_train,dirEN_in)
-# print(len(count_words_in_test),len(words_in_train)) #69697 69697
-# print(count_words_in_test) #[0, 0, 146, 0, 0, 21, 0, 0, 9, 0, 0, 1, 1, 0, 0, 0, 0, 6, 1, 146, 0,
-# print(words_in_train) #['Huawei', 'published', 'a', 'whitepaper', 'conducted', 'by', '@Forrester',
-# print (words_in_test) #['Netflix', 'and', 'chill', '.', 'With', 'my', 'cats', '.', 'Shut', 'your', 'mouth',
+# words_in_train, train_data, count_words_in_test, words_in_test = modifytestfile(dirEN_train,dirEN_in)
+# # print(len(count_words_in_test),len(words_in_train)) #69697 69697
+# # print(count_words_in_test) #[0, 0, 146, 0, 0, 21, 0, 0, 9, 0, 0, 1, 1, 0, 0, 0, 0, 6, 1, 146, 0,
+# # print(words_in_train) #['Huawei', 'published', 'a', 'whitepaper', 'conducted', 'by', '@Forrester',
+# # print (words_in_test) #['Netflix', 'and', 'chill', '.', 'With', 'my', 'cats', '.', 'Shut', 'your', 'mouth',
 
 def training(words_in_train,train_data,iterations,theta0): #takes training data as input, returns theta vector
     label_list = ["B-positive", "B-negative","B-neutral","I-positive","I-negative","I-neutral","O"]
@@ -120,18 +124,18 @@ def training(words_in_train,train_data,iterations,theta0): #takes training data 
     return theta_vector
 
 
-theta_vector = training(words_in_train, train_data,10,1)
-# theta_Bpos = theta_vector['B-positive']
-# theta_Bneu = theta_vector['B-neutral']
-# theta_Bneg = theta_vector["B-negative"]
-# theta_Ipos = theta_vector['I-positive']
-# theta_Ineu = theta_vector["I-neutral"]
-# theta_Ineg = theta_vector["I-negative"]
-# theta_O = theta_vector["O"]
-# print(len(theta_vector)) #7
-# print(theta_vector) #{'B-positive': array([0, 0, 0, ..., 0, 0, 0]), 'B-negative': array([0, 0, 0, ..., 0, 0, 0]),
-# print(len(theta_Bneg)) #69698 words
-# print(sum(theta_Bpos)) #0
+# theta_vector = training(words_in_train, train_data,10,1)
+# # theta_Bpos = theta_vector['B-positive']
+# # theta_Bneu = theta_vector['B-neutral']
+# # theta_Bneg = theta_vector["B-negative"]
+# # theta_Ipos = theta_vector['I-positive']
+# # theta_Ineu = theta_vector["I-neutral"]
+# # theta_Ineg = theta_vector["I-negative"]
+# # theta_O = theta_vector["O"]
+# # print(len(theta_vector)) #7
+# # print(theta_vector) #{'B-positive': array([0, 0, 0, ..., 0, 0, 0]), 'B-negative': array([0, 0, 0, ..., 0, 0, 0]),
+# # print(len(theta_Bneg)) #69698 words
+# # print(sum(theta_Bpos)) #0
 
 
 def predict(count_words_in_test, theta_vector, words_in_test, words_in_train, theta0):
@@ -161,7 +165,29 @@ def predict(count_words_in_test, theta_vector, words_in_test, words_in_train, th
     return output_file
 
 
-predict(count_words_in_test, theta_vector, words_in_test, words_in_train,1)
+#RU
+os.chdir('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU')
+dirRU_train =('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/train')
+dirRU_in =('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/dev.in')
+dirRU_out =('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/dev.out')
+words_in_train_RU, train_data_RU, count_words_in_test_RU, words_in_test_RU = modifytestfile(dirRU_train,dirRU_in)
+theta_vector_RU = training(words_in_train_RU, train_data_RU,10,1)
+predict(count_words_in_test_RU, theta_vector_RU, words_in_test_RU, words_in_train_RU,1)
+print("RU DONE")
+end_time = datetime.now()
+print('Duration: {}'.format(end_time - start_time))
+
+#ES
+os.chdir('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES')
+dirES_train =('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/train')
+dirES_in =('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/dev.in')
+dirES_out =('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/dev.out')
+words_in_train_ES, train_data_ES, count_words_in_test_ES, words_in_test_ES = modifytestfile(dirES_train,dirRU_in)
+theta_vector_ES = training(words_in_train_ES, train_data_ES,10,1)
+predict(count_words_in_test_ES, theta_vector_ES, words_in_test_ES, words_in_train_ES,1)
+print("ES DONE")
+end_time = datetime.now()
+print('Duration: {}'.format(end_time - start_time))
 
 ## still have problems. Sum of theta_vector for inidividual labels are still 0 (LINE 134)
 ## sum of wordcountlist is weird. check again (LINE 93)
