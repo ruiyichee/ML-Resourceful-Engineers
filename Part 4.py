@@ -1,3 +1,8 @@
+# ML Resourceful Engineers
+# Chee Rui Yi (1001738), Maylizabeth (1001818), Regina Lim (1001789)
+
+# Part 4 on kbest viterbi algorithm
+
 import os
 
 ggdict = {}
@@ -299,55 +304,28 @@ def backtracking(s, nodes,kth):
         s[i-2] += " " + prev_state # save the prev node
     return s
 
+# ES
+os.chdir('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES')
+dirES_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/train'
+dirES_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/dev.in'
+dirES_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/dev.out'
+## ES
+modified_test_ES, kcount_ES = modified_test(dirES_train, dirES_in)
+emission_param_ES, tag_count_ES = emission_par(get_data(dirES_train),kcount_ES)
+# sentiment_analysis(modified_test_ES, emission_param_ES)
+transition_params_ES = transition_params(dirES_train)
+viterbi_kbest(dirES_in, transition_params_ES, emission_param_ES, tag_count_ES, 7,5)
+print("ES DONE")
 
-# EN
-# RUIYI
-os.chdir('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN')
-dirEN_train = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/train')
-dirEN_in = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.in')
-dirEN_out = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.out')
-dirEN_test = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/modified_file.txt')
-## EN
-modified_test_EN, kcount_EN = modified_test(dirEN_train, dirEN_in)
-emission_param_EN, tag_count_EN = emission_par(get_data(dirEN_train),kcount_EN)
-# sentiment_analysis(modified_test_EN, emission_param_EN)
-transition_params_EN = transition_params(dirEN_train)
-# print(transition_params_EN)
-viterbi_kbest(dirEN_in, transition_params_EN, emission_param_EN, tag_count_EN, 7,5)
-print("EN DONE")
-
-# # CN
-# os.chdir('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/CN/CN')
-# dirCN_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/CN/CN/train'
-# dirCN_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/CN/CN/dev.in'
-# dirCN_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/CN/CN/dev.out'
-# dirCN_test = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/CN/CN/modified_file.txt'
-# ## CN
-# modified_test_CN, kcount_CN = modified_test(dirCN_train, dirCN_in)
-# emission_param_CN = emission_par(get_data(dirCN_train),kcount_CN)
-# # sentiment_analysis(modified_test_CN, emission_param_CN)
-# print("CN DONE")
-
-# # ES
-# os.chdir('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES')
-# dirES_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/train'
-# dirES_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/dev.in'
-# dirES_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/dev.out'
-# dirES_test = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/modified_file.txt'
-# ## ES
-# modified_test_ES, kcount_ES = modified_test(dirES_train, dirES_in)
-# emission_param_ES = emission_par(get_data(dirES_train),kcount_ES)
-# # sentiment_analysis(modified_test_ES, emission_param_ES)
-# print("ES DONE")
-
-# # RU
-# os.chdir('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU')
-# dirRU_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/train'
-# dirRU_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/dev.in'
-# dirRU_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/dev.out'
-# dirRU_test = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/modified_file.txt'
-# ## RU
-# modified_test_RU, kcount_RU = modified_test(dirRU_train, dirRU_in)
-# emission_param_RU = emission_par(get_data(dirRU_train),kcount_RU)
-# # sentiment_analysis(modified_test_RU, emission_param_RU)
-# print("RU DONE")
+# RU
+os.chdir('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU')
+dirRU_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/train'
+dirRU_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/dev.in'
+dirRU_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/dev.out'
+## RU
+modified_test_RU, kcount_RU = modified_test(dirRU_train, dirRU_in)
+emission_param_RU, tag_count_RU = emission_par(get_data(dirRU_train),kcount_RU)
+# sentiment_analysis(modified_test_RU, emission_param_RU)
+transition_params_RU = transition_params(dirRU_train)
+viterbi_kbest(dirRU_in, transition_params_RU, emission_param_RU, tag_count_RU, 7,5)
+print("RU DONE")

@@ -1,4 +1,8 @@
-# General Resourceful Engineers File
+# ML Resourceful Engineers
+# Chee Rui Yi (1001738), Maylizabeth (1001818), Regina Lim (1001789)
+
+# Part 2 on emission parameters and sentiment analysis system
+
 
 # from datetime import datetime
 # start_time = datetime.now()
@@ -152,15 +156,6 @@ def sentiment_analysis(test_file, emission_params):
     for i in range(0,counter):
         f.write("%s %s\n" % (testwords[i],tag[i]))
     f.close()
-    print('DONE')
-
-    # for key,value in output.items():
-    #     if value == "#UNK#":
-    #         f.write("%s %s\n" % ("#UNK#", UNKtag))
-    #     else:
-    #         f.write("%s %s\n" % (key,value))
-    # f.close()
-    # print('DONE')
 
 # EN
 # RUIYI
@@ -168,7 +163,6 @@ os.chdir('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Lea
 dirEN_train = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/train')
 dirEN_in = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.in')
 dirEN_out = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/EN/EN/dev.out')
-dirEN_test = ('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/modified_file.txt')
 ## EN
 modified_test_EN, kcount_EN = modified_test(dirEN_train, dirEN_in)
 emission_param_EN, tag_count_EN = emission_par(get_data(dirEN_train),kcount_EN)
@@ -180,7 +174,6 @@ os.chdir('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Lea
 dirCN_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/CN/CN/train'
 dirCN_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/CN/CN/dev.in'
 dirCN_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/CN/CN/dev.out'
-dirCN_test = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/CN/CN/modified_file.txt'
 ## CN
 modified_test_CN, kcount_CN = modified_test(dirCN_train, dirCN_in)
 emission_param_CN, tag_count_CN = emission_par(get_data(dirCN_train),kcount_CN)
@@ -192,7 +185,6 @@ os.chdir('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Lea
 dirES_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/train'
 dirES_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/dev.in'
 dirES_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/dev.out'
-dirES_test = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/ES/ES/modified_file.txt'
 ## ES
 modified_test_ES, kcount_ES = modified_test(dirES_train, dirES_in)
 emission_param_ES, tag_count_ES = emission_par(get_data(dirES_train),kcount_ES)
@@ -204,17 +196,8 @@ os.chdir('C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Lea
 dirRU_train = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/train'
 dirRU_in = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/dev.in'
 dirRU_out = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/dev.out'
-dirRU_test = 'C:/Users/ruiyicx/Documents/SUTD Subjects/ESD Term 7/01.112 Machine Learning/Project/RU/RU/modified_file.txt'
 ## RU
 modified_test_RU, kcount_RU = modified_test(dirRU_train, dirRU_in)
 emission_param_RU, tag_count_RU = emission_par(get_data(dirRU_train),kcount_RU)
 sentiment_analysis(modified_test_RU, emission_param_RU)
 print("RU DONE")
-
-# REGINA
-# dirEN_train = ('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/train')
-# dirEN_in = ('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.in')
-# dirEN_out = ('C:/Users/Regina/Documents/SUTD/ESD Term 5/Machine Learning/Project/EN/EN/dev.out')
-
-# end_time = datetime.now()
-# print('Duration: {}'.format(end_time - start_time))
