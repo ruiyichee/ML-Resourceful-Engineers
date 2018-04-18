@@ -65,7 +65,7 @@ def modifytestfile(trainfile, testfile):
     for word in words_in_train:
         count = 0
         if word in words_in_test:
-            count += 1+words_in_test.count(word)
+            count += words_in_test.count(word)
         modified_test.append(count)
 
     return words_in_train, train_data, modified_test, words_in_test
