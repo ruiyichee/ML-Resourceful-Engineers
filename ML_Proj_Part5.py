@@ -65,7 +65,7 @@ def modifytestfile(trainfile, testfile):
     for word in words_in_train:
         count = 0
         if word in words_in_test:
-            count += 1+words_in_test.count(word)
+            count += words_in_test.count(word)
         modified_test.append(count)
 
     return words_in_train, train_data, modified_test, words_in_test
@@ -114,7 +114,6 @@ def training(words_in_train,train_data,iterations,theta0): #takes training data 
                         theta_vector[label] += word_count_list # add vector to the correct weight
                         theta_vector[predicted_label] -= word_count_list # minus the vector from the wrong weight
                         # this allows for a more accurate learning of theta
-    print(theta_vector)
     return theta_vector
 
 def predict(count_words_in_test, theta_vector, words_in_test, words_in_train, theta0):
@@ -144,13 +143,14 @@ def predict(count_words_in_test, theta_vector, words_in_test, words_in_train, th
                 if threshold >= argmax:
                     argmax = threshold
                     predicted_label = k
-                    tag.append(predicted_label)
+            tag.append(predicted_label)
+            
         elif word == "":
             testwords.append("")
             tag.append("")            
         else:
             testwords.append(word)
-            tag.append("unknown")
+            tag.append("")
 
     for i in range(0,counter):
         output_file.write("%s %s\n" % (testwords[i], tag[i]))
