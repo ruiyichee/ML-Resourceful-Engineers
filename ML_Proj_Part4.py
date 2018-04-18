@@ -198,7 +198,6 @@ def viterbi_kbest(test_file, transition_par, emission_par, tags, topk, kth):
         else:
             sentences.append(sentence)
             sentence = []
-    # print(sentences)
         
     output_file = open("dev.p4.out", "w+", encoding="utf8")
     for s in sentences:
@@ -252,10 +251,6 @@ def calculate_node_scores(s, transition_par, emission_par, tags, topk):
                     score = prev_score*a*b
                     scores.append([score, U, index])
                     index += 1
-                # Adjust the highest score accordingly
-                # if score >= highest_score:
-                #     highest_score = score
-                #     parent = U # previous node
 
             # take top k scores
             scores.sort(key=lambda x:x[0], reverse=True)
@@ -267,8 +262,6 @@ def calculate_node_scores(s, transition_par, emission_par, tags, topk):
                 nodes[k] = new_dict
     # end case
     prev_nodes_dict = nodes[len(s)] # last layer
-    # highest_score = 0 # initialise end node
-    # parent = 'None' # initialise end node
     scores = []
     # take the U node in order to do transition parameters
     # transition parameters

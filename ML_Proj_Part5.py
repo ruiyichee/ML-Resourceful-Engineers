@@ -52,26 +52,23 @@ def modifytestfile(trainfile, testfile):
     '''
     raw_test = open(testfile, 'r+', encoding="utf8")
     words_in_test = []
-    for rawwords in raw_test:
-        words = rawwords.split('\n')
-        words_in_test.append(words[0])
+    read_lines =raw_test.read()
+    lines = read_lines.split('\n')
+    for words in lines:
+        try:
+            words_in_test.append(words)
+        except:
+            words_in_test.append('')
 
     modified_test = []
-    #modified_test is a list that counts the number of times the words appear in test file, in the same order as the words in trainfile
+    # modified_test is a list that counts the number of times the words appear in test file, in the same order as the words in trainfile
     for word in words_in_train:
-        count = -1
+        count = 0
         if word in words_in_test:
             count += 1+words_in_test.count(word)
         modified_test.append(count)
 
-
     return words_in_train, train_data, modified_test, words_in_test
-
-# words_in_train, train_data, count_words_in_test, words_in_test = modifytestfile(dirEN_train,dirEN_in)
-# # print(len(count_words_in_test),len(words_in_train)) #69697 69697
-# # print(count_words_in_test) #[0, 0, 146, 0, 0, 21, 0, 0, 9, 0, 0, 1, 1, 0, 0, 0, 0, 6, 1, 146, 0,
-# # print(words_in_train) #['Huawei', 'published', 'a', 'whitepaper', 'conducted', 'by', '@Forrester',
-# # print (words_in_test) #['Netflix', 'and', 'chill', '.', 'With', 'my', 'cats', '.', 'Shut', 'your', 'mouth',
 
 def training(words_in_train,train_data,iterations,theta0): #takes training data as input, returns theta vector
     label_list = ["B-positive", "B-negative","B-neutral","I-positive","I-negative","I-neutral","O"]
@@ -89,77 +86,74 @@ def training(words_in_train,train_data,iterations,theta0): #takes training data 
             #label would show B-positive, B-negative
             #word_dict shows a dictionary of all the 69k words {"Donny's": 1, 'Sticks': 1, 'Tesco': 2, 'parasites': 1}
             '''
-            for i in range(len(words_in_train)): #iterate through 69k times
+            for i in range(len(words_in_train)): # iterate through 69k times
                 word = words_in_train[i]
-                if word in word_dict: #if for that particular label, the word is in the word dictionary
+                if word in word_dict: # if for that particular label, the word is in the word dictionary
                     word_count_list.append(word_dict[word])
-                    #appends the count for that partcular word in the corresponding label
+                    # appends the count for that partcular word in the corresponding label
             word_count_list.append(theta0)
-            # print(sum(word_count_list))
             # word_count_list is a list of the counts of words [1, 1, 1, 1, 6, 15, 6, 2, 6, 1, 6, 6, 1, 1, 3, 1
             train_array = np.array(word_count_list)
-            #print(train_array)
             argmax = 0 #initialize the argmax
             predicted_label = label_list[0]
-            #initialise the first label to be "B-positive"
+             #initialise the first label to be "B-positive"
 
             theta_vector = {c: np.array([0 for i in range(len(word_count_list))]) for c in label_list}
-            # print(theta_vector)
 
             for i in range(len(label_list)):
 
-                key1 = label_list[i] #key1 = "B-positive"
-                thetav = theta_vector[key1] #the specific theta for the label
-                learning = np.dot(word_count_list, thetav) #this is the learning phase, theta dot x = y
+                key1 = label_list[i] # key1 = "B-positive"
+                thetav = theta_vector[key1] # the specific theta for the label
+                learning = np.dot(word_count_list, thetav) # this is the learning phase, theta dot x = y
 
                 if learning >= argmax:
                     argmax = learning
                     predicted_label = label_list[i]
 
-            if label != predicted_label: #if the label is wrongly predicted, update the theta
-                theta_vector[label] += word_count_list #add vector to the correct weight
-                theta_vector[predicted_label] -= word_count_list #minus the vector from the wrong weight
-                # this allows for a more accurate learning of theta
-
+                    if label != predicted_label: # if the label is wrongly predicted, update the theta
+                        theta_vector[label] += word_count_list # add vector to the correct weight
+                        theta_vector[predicted_label] -= word_count_list # minus the vector from the wrong weight
+                        # this allows for a more accurate learning of theta
+    print(theta_vector)
     return theta_vector
-
-
-# theta_vector = training(words_in_train, train_data,10,1)
-# # theta_Bpos = theta_vector['B-positive']
-# # theta_Bneu = theta_vector['B-neutral']
-# # theta_Bneg = theta_vector["B-negative"]
-# # theta_Ipos = theta_vector['I-positive']
-# # theta_Ineu = theta_vector["I-neutral"]
-# # theta_Ineg = theta_vector["I-negative"]
-# # theta_O = theta_vector["O"]
-# # print(len(theta_vector)) #7
-# # print(theta_vector) #{'B-positive': array([0, 0, 0, ..., 0, 0, 0]), 'B-negative': array([0, 0, 0, ..., 0, 0, 0]),
-# # print(len(theta_Bneg)) #69698 words
-# # print(sum(theta_Bpos)) #0
-
 
 def predict(count_words_in_test, theta_vector, words_in_test, words_in_train, theta0):
     # initialisation
     count_words_in_test.append(theta0)
     output_file = open("dev.p5.out", "w+", encoding="utf8")
+    testwords = []
+    tag = []
+    counter = 0
 
-    for word in words_in_test: #iterate through every word in the testfile
-        output_file.write(word + " ")
+    for word in words_in_test: # iterate through every word in the testfile
+        counter += 1
+        # output_file.write(word + " ")
         word_vector = [0] * len(count_words_in_test)
         argmax = 0
         predicted_label = "B-positive"
+
         if word in words_in_train:
+            testwords.append(word)
             index = words_in_train.index(word)
             word_vector[index] = 1
 
             for k in theta_vector.keys():
-                #iterate with the different label thetas as well. k is the labels "B-positive", "B-negative" etc
+                # iterate with the different label thetas as well. k is the labels "B-positive", "B-negative" etc
                 threshold = np.dot(word_vector,theta_vector[k])
                 # print(threshold)
                 if threshold >= argmax:
                     argmax = threshold
                     predicted_label = k
-            output_file.write(predicted_label + "\n")
+                    tag.append(predicted_label)
+        elif word == "":
+            testwords.append("")
+            tag.append("")            
+        else:
+            testwords.append(word)
+            tag.append("unknown")
+
+    for i in range(0,counter):
+        output_file.write("%s %s\n" % (testwords[i], tag[i]))
 
     output_file.close()
     return output_file
@@ -188,6 +182,3 @@ predict(count_words_in_test_ES, theta_vector_ES, words_in_test_ES, words_in_trai
 print("ES DONE")
 end_time = datetime.now()
 print('Duration: {}'.format(end_time - start_time))
-
-## still have problems. Sum of theta_vector for inidividual labels are still 0 (LINE 134)
-## sum of wordcountlist is weird. check again (LINE 93)
