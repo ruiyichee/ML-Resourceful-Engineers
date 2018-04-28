@@ -55,10 +55,23 @@ def modifytestfile(trainfile, testfile):
     read_lines =raw_test.read()
     lines = read_lines.split('\n')
     for words in lines:
-        try:
+        if words == " ":
+            words_in_test.append(" ")
+        else:
             words_in_test.append(words)
-        except:
-            words_in_test.append('')
+        # try:
+        #     words_in_test.append(words)
+        # except:
+        #     words_in_test.append('')
+    temp = []
+    for w in words_in_test:
+        if w in words_in_train:
+            temp.append(w)
+        elif w == '':
+            temp.append('')
+        else:
+            temp.append('#UNK')
+    words_in_test = temp
 
     modified_test = []
     # modified_test is a list that counts the number of times the words appear in test file, in the same order as the words in trainfile
@@ -131,25 +144,25 @@ def predict(count_words_in_test, theta_vector, words_in_test, words_in_train, th
         argmax = 0
         predicted_label = "B-positive"
 
-        if word in words_in_train:
-            testwords.append(word)
+        testwords.append(word)
+
+        if word == "#UNK":
+            tag.append("O")
+
+        elif word in words_in_train:
             index = words_in_train.index(word)
             word_vector[index] = 1
 
             for k in theta_vector.keys():
                 # iterate with the different label thetas as well. k is the labels "B-positive", "B-negative" etc
                 threshold = np.dot(word_vector,theta_vector[k])
-                # print(threshold)
-                if threshold >= argmax:
+                if threshold > argmax:
                     argmax = threshold
                     predicted_label = k
-                    tag.append(predicted_label)
+            tag.append(predicted_label)
             
-        elif word == "":
-            testwords.append("")
-            tag.append("")            
         else:
-            testwords.append(word)
+            # print("word is %s" % word)
             tag.append("")
 
     for i in range(0,counter):
